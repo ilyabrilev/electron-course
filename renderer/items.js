@@ -122,7 +122,7 @@ exports.open = () => {
   `)
 
   // Inject JavaScript with specific item index (selectedItem.index)
-  readerWin.eval( readerJS.replace('{{index}}', selectedItem.index) )
+  // readerWin.eval( readerJS.replace('{{index}}', selectedItem.index) )
 }
 
 // Add new item

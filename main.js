@@ -1,5 +1,5 @@
 // Modules
-const {app, BrowserWindow, ipcMain} = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const windowStateKeeper = require('electron-window-state');
 const readItem = require('./readItem')
 
@@ -15,9 +15,9 @@ ipcMain.on('new-item', (e, itemUrl) => {
 });
 
 // Create a new BrowserWindow when `app` is ready
-function createWindow () {
+function createWindow() {
 
-  let state = windowStateKeeper({defaultWidth: 500, defaultHeight: 650})
+  let state = windowStateKeeper({ defaultWidth: 500, defaultHeight: 650 })
 
   mainWindow = new BrowserWindow({
     x: state.x, y: state.y,
@@ -33,6 +33,18 @@ function createWindow () {
     backgroundColor: '#2B2E3B',
   })
 
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    return {
+      action: 'allow',
+      overrideBrowserWindowOptions: {
+        webPreferences: {
+          preload: `${__dirname}/renderer/reader.js`
+        }
+      }
+    }
+  });
+
+
   // Load index.html into the new BrowserWindow
   mainWindow.loadFile('renderer/main.html')
 
@@ -42,7 +54,7 @@ function createWindow () {
   // mainWindow.webContents.openDevTools();
 
   // Listen for window being closed
-  mainWindow.on('closed',  () => {
+  mainWindow.on('closed', () => {
     mainWindow = null
   })
 }
