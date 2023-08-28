@@ -1,9 +1,10 @@
 {
-  "name": "master-electron",
+  "name": "readit",
   "version": "1.0.0",
-  "description": "Master Electron Course Code",
+  "description": "Master Electron Project Code",
   "main": "main.js",
   "scripts": {
+    "build": "electron-builder --help",
     "start": "electron .",
     "watch": "nodemon --exec electron .",
     "reset": "git reset --hard"
@@ -18,7 +19,10 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^25.6",
+    "electron-builder": "^24.6.3",
     "nodemon": "^2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "electron-window-state": "^5.0.3"
+  }
 }
